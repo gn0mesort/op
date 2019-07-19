@@ -8,7 +8,7 @@ const Discord = require('discord.js');
 
 const OP = require(std.path.join(__dirname, '../../../index.js'));
 
-class EchoCmd extends OP.Command {
+class FetchUserCmd extends OP.Command {
   constructor(config) {
     super(config);
   }
@@ -40,4 +40,4 @@ class EchoCmd extends OP.Command {
   }
 }
 
-module.exports = EchoCmd;
+module.exports = FetchUserCmd;
