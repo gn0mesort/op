@@ -23,5 +23,10 @@ if (program.args.length < 1) {
 }
 
 const config = require(std.path.join(process.cwd(), program.args[0]));
-config.path = std.path.parse(std.path.join(process.cwd(), program.args[0])).dir;
+if (!std.path.isAbsolute(program.args[0])) {
+  config.path = std.path.dirname(std.path.join(process.cwd(), program.args[0]));
+}
+else {
+  config.path = program.args[0];
+}
 const bot = new OP.Bot(new Discord.Client(), config);
