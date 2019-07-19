@@ -22,11 +22,13 @@ if (program.args.length < 1) {
   program.help();
 }
 
-const config = require(std.path.join(process.cwd(), program.args[0]));
+let config_path = null;
 if (!std.path.isAbsolute(program.args[0])) {
-  config.path = std.path.dirname(std.path.join(process.cwd(), program.args[0]));
+  config_path = std.path.join(process.cwd(), program.args[0]);
 }
 else {
-  config.path = program.args[0];
+  config_path = program.args[0];
 }
+const config = require(config_path);
+config.path = std.path.dirname(config_path);
 const bot = new OP.Bot(new Discord.Client(), config);
