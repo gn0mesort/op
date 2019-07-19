@@ -1,0 +1,27 @@
+{
+  "name": "op",
+  "version": "1.0.0",
+  "description": "Discord bot base",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": "bin/op.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gn0mesort/op.git"
+  },
+  "author": "Alexander Rothman <gnomesort@megate.ch>",
+  "license": "GPL-3.0+",
+  "bugs": {
+    "url": "https://github.com/gn0mesort/op/issues"
+  },
+  "homepage": "https://github.com/gn0mesort/op#readme",
+  "dependencies": {
+    "@discordjs/uws": "^11.149.1",
+    "bunyan": "^1.8.12",
+    "commander": "^2.20.0",
+    "discord.js": "^11.5.1",
+    "erlpack": "github:hammerandchisel/erlpack"
+  }
+}
