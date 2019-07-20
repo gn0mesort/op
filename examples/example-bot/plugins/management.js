@@ -1,10 +1,10 @@
 'use strict';
 
-const std = {
-  path: require('path')
-};
+// const std = {
+//   path: require('path')
+// };
 
-const OP = require(std.path.join(__dirname, '../../../index.js'));
+// const OP = require(std.path.join(__dirname, '../../../index.js'));
 
 class ListPluginsCmd extends OP.Command {
   constructor(bot) {

@@ -6,9 +6,9 @@ const std = {
   path: require('path')
 };
 const program = require('commander');
-const Discord = require('discord.js');
 
-const OP = require(std.path.join(__dirname, '../index.js'));
+// Load OP library and make it globally accessible
+global.OP = require(std.path.join(__dirname, '../index.js'));
 
 const pkg = require(std.path.join(__dirname, '../package.json'));
 
@@ -31,4 +31,4 @@ else {
 }
 const config = require(config_path);
 config.path = std.path.dirname(config_path);
-const bot = new OP.Bot(new Discord.Client(), config);
+const bot = new OP.Bot(new OP.Discord.Client(), config);
