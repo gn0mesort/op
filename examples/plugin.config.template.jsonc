@@ -1,0 +1,17 @@
+{
+  // The plugin's name. Required.
+  "name": "",
+  // The plugin's description.
+  "description": "",
+  // The plugin's version.
+  "version": "",
+  // A path to load the plugin from. This may be an absolute or relative path.
+  // Relative paths are handled relative to the directory of the configuration
+  // file they're found in. If this is omitted the plugin will not be loaded
+  // automatically.
+  "path": "",
+  // Whether or not to activate the plugin at startup.
+  "enabled": true,
+  // Arbitrary plugin specific configuration data.
+  "config": {}
+}

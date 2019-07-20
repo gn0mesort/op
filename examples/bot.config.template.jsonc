@@ -1,0 +1,25 @@
+{
+  // The Discord bot token used for login. Care should be taken not to leak this
+  // information outside the bot. The Bot class itself will not store it. This
+  // is the only required property for bots.
+  "token": "",
+  // The bot's name.
+  "name": "",
+  // The bot's version.
+  "version": "",
+  // The bot's log level. This should be a Bunyan log level.
+  "loglevel": "",
+  // Permissions that are required by the bot. These are used to generate an
+  // invite link at startup. These should be discord.js Permissions.
+  "permissions": [],
+  // An array of Discord user IDs who have unfettered access to the bot. Users
+  // with this permission can run any command regardless of other restrictions.
+  // Use with care.
+  "admins": [],
+  // An array of Plugin configurations. See plugin.config.template.jsonc for
+  // more info.
+  "plugins": [],
+  // An array of Command configurations. See command.config.template.jsonc for
+  // more info.
+  "commands": []
+}

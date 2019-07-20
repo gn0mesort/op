@@ -1,0 +1,25 @@
+{
+  // The command's name. Required.
+  "name": "",
+  // The command's description.
+  "description": "",
+  // The command's version.
+  "version": "",
+  // A help message describing the command.
+  "help": "",
+  // A path to load the command from. This may be an absolute or relative path.
+  // Relative paths are handled relative to the directory of the configuration
+  // file they're found in. If this is omitted the command will not be loaded
+  // automatically.
+  "path": "",
+  // An object containing the names of roles permitted to use the command.
+  // This should be formatted as:
+  // { "guildID": [ "roleName1", "roleName2" ] }
+  // Roles override the need for specific permissions.
+  "roles": {},
+  // Permissions required to use this command. This is an array of discord.js
+  // Permissions.
+  "permissions": [],
+  // Arbitrary command specific configuration data.
+  "config": {}
+}
