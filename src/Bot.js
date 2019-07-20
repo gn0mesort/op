@@ -66,7 +66,30 @@ async function directCommandParse(message, bot) {
   }
 }
 
+/**
+ * An OP bot.
+ *
+ * The Bot class is the core of OP. It provides extremely limited functionality
+ * with the intention that users will extend it with Plugins or Commands.
+ * Primarily the Bot object provides start up and tear down routines for
+ * whatever underlying functionality a configuration has set up. This includes
+ * loading Commands/Plugins based on their configurations, activating enabled
+ * Plugins, and providing a command parser. After the ready event has been
+ * fired by the Bot's Discord.Client the only part of it still hooked into
+ * Discord by default is the command parser.
+ *
+ * An example configuration with comments can be found in
+ * examples/bot.config.template.json. This config is intended to be
+ * included inline with the Bot configuration.
+ */
 class Bot {
+  /**
+   * Bot constructor.
+   *
+   * @param {Discord.Client} client The underlying client this bot uses.
+   * @param {Object} config The bot configuration and command/plugin
+   * configurations which depend on it.
+   */
   constructor(client, config) {
     this[PRIVATE] = {};
     config.name = config.name || 'op';

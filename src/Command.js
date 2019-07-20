@@ -17,10 +17,13 @@ const PRIVATE = Symbol('PRIVATE');
  * An example configuration with comments can be found in
  * examples/command.config.template.json. This config is intended to be
  * included inline with the Bot configuration.
- *
- * @param {Object} config The command's configuration data
  */
 class Command {
+  /**
+   * Command constructor.
+   *
+   * @param {Object} config The config object used to initialize the Command.
+   */
   constructor(config) {
     this[PRIVATE] = {};
     this[PRIVATE].name = config.name;

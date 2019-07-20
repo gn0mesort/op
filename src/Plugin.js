@@ -16,10 +16,13 @@ const PRIVATE = Symbol('PRIVATE');
  * An example configuration with comments can be found in
  * examples/plugin.config.template.json. This config is intended to be
  * included inline with the Bot configuration.
- *
- * @param {Object} config The plugin's configuration data
  */
 class Plugin {
+  /**
+   * Plugin constructor.
+   *
+   * @param {Object} config The config object used to initialize the plugin.
+   */
   constructor(config) {
     this[PRIVATE] = {};
     this[PRIVATE].name = config.name;

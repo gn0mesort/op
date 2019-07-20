@@ -24,7 +24,7 @@
       "name": "fetch-user",
       "description": "Fetches user data from Discord.",
       "version": "1.0.0",
-      "help": "USAGE: fetch-user <USER_ID>",
+      "help": "USAGE: fetch-user <USER_ID>"
     }
   ]
 }
