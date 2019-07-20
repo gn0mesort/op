@@ -2,8 +2,6 @@
   "token": "",
   "name": "example-bot",
   "version": "1.0.0",
-  "loglevel": "debug",
-  "admins": [ "" ],
   "permissions": [ "ADMINISTRATOR" ],
   "plugins": [
     {
@@ -11,8 +9,7 @@
       "description": "Introduces management functions via a command interface.",
       "version": "1.0.0",
       "path": "plugins/management.js",
-      "enabled": true,
-      "config": {}
+      "enabled": true
     }
   ],
   "commands": [
@@ -21,20 +18,13 @@
       "description": "Echos command arguments.",
       "version": "1.0.0",
       "help": "USAGE: echo <TEXT>",
-      "path": "cmds/echo.js",
-      "roles": null,
-      "permissions": null,
-      "config": {}
+      "path": "cmds/echo.js"
     },
     {
       "name": "fetch-user",
       "description": "Fetches user data from Discord.",
       "version": "1.0.0",
       "help": "USAGE: fetch-user <USER_ID>",
-      "path": "cmds/fetch_user.js",
-      "roles": null,
-      "permissions": null,
-      "config": {}
     }
   ]
 }

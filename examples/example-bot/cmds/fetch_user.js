@@ -1,11 +1,5 @@
 'use strict';
 
-// const std = {
-//   path: require('path')
-// };
-
-// const OP = require(std.path.join(__dirname, '../../../index.js'));
-
 class FetchUserCmd extends OP.Command {
   constructor(config) {
     super(config);
