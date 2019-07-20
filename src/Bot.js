@@ -5,15 +5,19 @@ const std = {
 };
 
 const Bunyan = require('bunyan');
-// const Discord = require('discord.js');
 
 const PRIVATE = Symbol('PRIVATE');
 
 function loadModules(dir, configs) {
   let modules = {};
-  let Mod= null;
+  let Mod = null;
   for (let config of configs) {
-    Mod = require(std.path.join(dir, config.path));
+    if (std.path.isAbsolute(config.path)) {
+      Mod = require(config.path);
+    }
+    else {
+      Mod = require(std.path.join(dir, config.path));
+    }
     modules[config.name] = new Mod(config);
   }
   return modules;
@@ -66,8 +70,8 @@ class Bot {
   constructor(client, config) {
     this[PRIVATE] = {};
     this[PRIVATE].logger = Bunyan.createLogger({
-      name: config.name,
-      level: config.loglevel
+      name: config.name || 'op',
+      level: config.loglevel || 'info'
     });
     this[PRIVATE].client = client;
     this[PRIVATE].config = Object.freeze(config);
