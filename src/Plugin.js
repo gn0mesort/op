@@ -17,7 +17,7 @@ const PRIVATE = Symbol('PRIVATE');
  * examples/plugin.config.template.json. This config is intended to be
  * included inline with the Bot configuration.
  *
- * @param {Object} config The plugin's configurationd data
+ * @param {Object} config The plugin's configuration data
  */
 class Plugin {
   constructor(config) {
@@ -78,7 +78,7 @@ class Plugin {
    * Deinitializes a plugin.
    *
    * This method should only be called by Plugin.prototype.deactivate() which
-   * provides checks for whether or not the plugin is already active. This
+   * provides checks for whether or not the plugin is already inactive. This
    * method must be overriden by any class implementing Plugin.
    *
    * @param {Bot} bot The Bot this Plugin belongs too.
