@@ -8,10 +8,13 @@ const Bunyan = require('bunyan');
 
 const PRIVATE = Symbol('PRIVATE');
 
-function loadModules(dir, configs) {
-  let modules = {};
+function loadModules(dir, configs, initial) {
+  let modules = initial;
   let Mod = null;
   for (let config of configs) {
+    if (!config.path) {
+      continue;
+    }
     if (std.path.isAbsolute(config.path)) {
       Mod = require(config.path);
     }
@@ -47,8 +50,10 @@ async function directCommandParse(message, bot) {
     }
     let allowCommand = !(command.roles || command.permissions);
     if (command.roles && isGuildMessage(message)) {
-      for (let roleName of command.roles) {
-       let role = message.guild.roles.find('name', roleName);
+      for (let roleName of command.roles[message.guild.id]) {
+       let role = message.guild.roles.find((elem) => {
+         return elem.name === roleName;
+       });
        allowCommand |= role.members.get(message.member.id);
       }
     }
@@ -89,9 +94,17 @@ class Bot {
    * @param {Discord.Client} client The underlying client this bot uses.
    * @param {Object} config The bot configuration and command/plugin
    * configurations which depend on it.
+   * @param {Object} commands An object containing preloaded commands. Each
+   * command's key should be its name. The value should be an object derived
+   * from the Command type.
+   * @param {Object} plugins An object containing preloaded plugins. Each
+   * plugin's key should be its name. The value should be an object derived
+   * from the Plugin type.
    */
-  constructor(client, config) {
+  constructor(client, config, commands = {}, plugins = {}) {
     this[PRIVATE] = {};
+    const token = config.token;
+    delete config.token;
     config.name = config.name || 'op';
     config.version = config.version || '0.0.0';
     config.loglevel = config.loglevel || 'info';
@@ -105,9 +118,12 @@ class Bot {
     });
     this[PRIVATE].client = client;
     this[PRIVATE].config = Object.freeze(config);
-    this[PRIVATE].plugins = loadModules(config.path, config.plugins);
-
-    this[PRIVATE].commands = loadModules(config.path, config.commands);
+    this[PRIVATE].plugins = loadModules(config.path, config.plugins, plugins);
+    this[PRIVATE].commands = loadModules(
+      config.path,
+      config.commands,
+      commands
+    );
 
     this[PRIVATE].client.once('ready', async () => {
       const logger = this[PRIVATE].logger,
@@ -140,7 +156,7 @@ class Bot {
       }
     });
 
-    this[PRIVATE].client.login(this[PRIVATE].config.token);
+    this[PRIVATE].client.login(token);
   }
 
   get plugins() {
