@@ -43,7 +43,7 @@ class Command {
   }
 
   async exec(argv, message, logger) {
-    throw Error('Not implemented');
+    throw Error('Not implemented.');
   }
 }
 

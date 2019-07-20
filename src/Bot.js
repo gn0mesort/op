@@ -89,7 +89,7 @@ class Bot {
           `${plugin.name} - ${plugin.enabled ? 'enabled' : 'disabled'}`
         );
         if (plugin.enabled) {
-          plugin.initialize(this, client, logger);
+          plugin.activate(this, client, logger);
         }
       }
 

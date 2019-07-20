@@ -4,8 +4,6 @@ const std = {
   path: require('path')
 };
 
-const Discord = require('discord.js');
-
 const OP = require(std.path.join(__dirname, '../../../index.js'));
 
 class FetchUserCmd extends OP.Command {
@@ -19,7 +17,7 @@ class FetchUserCmd extends OP.Command {
       message.channel.send(err);
       throw new Error(err);
     }
-    let msg = new Discord.RichEmbed();
+    let msg = new OP.Discord.RichEmbed();
     let user = null;
     try {
       if (!argv[1].match(/^\d+/g)) {

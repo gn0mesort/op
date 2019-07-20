@@ -52,7 +52,7 @@ class ActivatePluginCmd extends OP.Command {
     }
     let plugin = this.bot.plugins[argv[1]];
     if (plugin) {
-      plugin.initialize(this.bot, message.client, logger);
+      plugin.activate(this.bot, message.client, logger);
       return message.channel.send(`${plugin.name} activated.`);
     }
     else {
@@ -85,7 +85,7 @@ class DeactivatePluginCmd extends OP.Command {
     }
     let plugin = this.bot.plugins[argv[1]];
     if (plugin) {
-      plugin.deinitialize(this.bot, message.client, logger);
+      plugin.deactivate(this.bot, message.client, logger);
       return message.channel.send(`${plugin.name} deactivated.`);
     }
     else {
@@ -163,25 +163,17 @@ class DescribeCmd extends OP.Command {
 
 class ManagementPlugin extends OP.Plugin {
   initialize(bot, client, logger) {
-    if (this.active !== 'active') {
-      super.initialize(bot, client, logger);
-      bot.commands['list-plugins'] = new ListPluginsCmd(bot);
-      bot.commands['activate-plugin'] = new ActivatePluginCmd(bot);
-      bot.commands['deactivate-plugin'] = new DeactivatePluginCmd(bot);
-      bot.commands['list-commands'] = new ListCommandsCmd(bot);
-      bot.commands['describe'] = new DescribeCmd(bot);
-    }
+    bot.commands['list-plugins'] = new ListPluginsCmd(bot);
+    bot.commands['activate-plugin'] = new ActivatePluginCmd(bot);
+    bot.commands['deactivate-plugin'] = new DeactivatePluginCmd(bot);
+    bot.commands['list-commands'] = new ListCommandsCmd(bot);
+    bot.commands['describe'] = new DescribeCmd(bot);
   }
 
-  // If you could deinitialize the management plugin then you would screw up
-  // everything!
+  // If you could deinitialize the management plugin then you wouldn't be able
+  // to reactivate it again later!!
   deinitialize(bot, client, logger) {
-    // if (this.active !== 'active) {
-    //   super.deinitialize(bot, client, logger);
-    //   delete bot.commands['list-plugins'];
-    //   delete bot.commands['activate-plugin'];
-    //   delete bot.commands['deactivate-plugin'];
-    // }
+    return;
   }
 }
 

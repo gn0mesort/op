@@ -43,15 +43,25 @@ class Plugin {
   }
 
   initialize(bot, client, logger) {
+    throw new Error('Not implemented.');
+  }
+
+  deinitialize(bot, client, logger) {
+    throw new Error('Not implemented');
+  }
+
+  activate(bot, client, logger) {
     if (!this[PRIVATE].active) {
       this[PRIVATE].active = true;
+      this.initialize(bot, client, logger);
       logger.debug(`${this.name} - initialized`);
     }
   }
 
-  deinitialize(bot, client, logger) {
+  deactivate(bot, client, logger) {
     if (this[PRIVATE].active) {
       this[PRIVATE].active = false;
+      this.deinitialize(bot, client, logger);
       logger.debug(`${this.name} - deinitialized`);
     }
   }
