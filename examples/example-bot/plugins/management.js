@@ -13,8 +13,6 @@ class ListPluginsCmd extends OP.Command {
       description: 'Lists all plugins and their state.',
       version: '1.0.0',
       help: 'USAGE: list-plugins',
-      path: '',
-      roles: null,
       permissions: [ 'ADMINISTRATOR' ]
     });
     this.bot = bot;
@@ -37,8 +35,6 @@ class ActivatePluginCmd extends OP.Command {
       description: 'Activates a plugin.',
       version: '1.0.0',
       help: 'USAGE: activate-plugin <PLUGIN>',
-      path: '',
-      roles: null,
       permissions: [ 'ADMINISTRATOR' ]
     });
     this.bot = bot;
@@ -70,8 +66,6 @@ class DeactivatePluginCmd extends OP.Command {
       description: 'Deactivates a plugin.',
       version: '1.0.0',
       help: 'USAGE: deactivate-plugin <PLUGIN>',
-      path: '',
-      roles: null,
       permissions: [ 'ADMINISTRATOR' ]
     });
     this.bot = bot;
@@ -102,10 +96,7 @@ class ListCommandsCmd extends OP.Command {
       name: 'list-commands',
       description: 'List all loaded commands.',
       version: '1.0.0',
-      help: 'USAGE: list-commands',
-      path: '',
-      roles: null,
-      permissions: null
+      help: 'USAGE: list-commands'
     });
     this.bot = bot;
   }
@@ -126,10 +117,7 @@ class DescribeCmd extends OP.Command {
       name: 'describe',
       description: 'Provides explanations of commands and plugins.',
       version: '1.0.0',
-      help: 'USAGE: describe <COMMAND|PLUGIN>',
-      path: '',
-      roles: null,
-      permissions: null
+      help: 'USAGE: describe <COMMAND|PLUGIN>'
     });
     this.bot = bot;
   }

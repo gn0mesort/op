@@ -69,9 +69,16 @@ async function directCommandParse(message, bot) {
 class Bot {
   constructor(client, config) {
     this[PRIVATE] = {};
+    config.name = config.name || 'op';
+    config.version = config.version || '0.0.0';
+    config.loglevel = config.loglevel || 'info';
+    config.permissions = config.permissions || [];
+    config.admins = config.admins || [];
+    config.plugins = config.plugins || [];
+    config.commands = config.commands || [];
     this[PRIVATE].logger = Bunyan.createLogger({
-      name: config.name || 'op',
-      level: config.loglevel || 'info'
+      name: config.name,
+      level: config.loglevel
     });
     this[PRIVATE].client = client;
     this[PRIVATE].config = Object.freeze(config);

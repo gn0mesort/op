@@ -6,12 +6,13 @@ class Command {
   constructor(config) {
     this[PRIVATE] = {};
     this[PRIVATE].name = config.name;
-    this[PRIVATE].description = config.description;
-    this[PRIVATE].version = config.version;
-    this[PRIVATE].help = config.help;
-    this[PRIVATE].path = config.path;
-    this[PRIVATE].permissions = config.permissions;
-    this[PRIVATE].config = Object.freeze(config.config);
+    this[PRIVATE].description = config.description || '';
+    this[PRIVATE].version = config.version || '0.0.0';
+    this[PRIVATE].help = config.help || '';
+    this[PRIVATE].path = config.path || '';
+    this[PRIVATE].roles = config.roles || [];
+    this[PRIVATE].permissions = config.permissions || [];
+    this[PRIVATE].config = Object.freeze(config.config || {});
   }
 
   get name() {
@@ -32,6 +33,10 @@ class Command {
 
   get path() {
     return this[PRIVATE].path;
+  }
+
+  get roles() {
+    return this[PRIVATE].roles;
   }
 
   get permissions() {
