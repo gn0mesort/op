@@ -38,6 +38,7 @@ async function directCommandParse(message, bot) {
     message.author.id !== message.client.user.id &&
     !message.author.bot
   ) {
+    logger.info(`Command received from ${message.author.tag}`);
     const argv = message.content.split(/\s+/g).slice(1),
           command = bot.commands[argv[0]];
     if (!command) {
@@ -48,8 +49,17 @@ async function directCommandParse(message, bot) {
       bot.config.admins.includes(message.author.id)
     ) {
       logger.info(`Running command ${argv[0]} with args: ${argv}`);
-      await command.exec(argv, message, logger);
-      logger.debug(`Command ${argv[0]} succeeded.`);
+      try {
+        await command.exec(argv, message, logger);
+        logger.debug(`Command ${argv[0]} succeeded.`);
+      }
+      catch (err) {
+        logger.error(`Command ${argv[0]} failed.`);
+        logger.error(err);
+      }
+    }
+    else {
+      logger.info(`Command ${argv[0]} not permitted.`);
     }
   }
 }
