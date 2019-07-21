@@ -22,7 +22,7 @@ const OP = require('op');
 
 ## Invoking Commands
 
-```
+```none
 @<MY_BOT> <COMMAND> [ARGS...]
 ```
 
@@ -74,6 +74,10 @@ More realistically a valid configuration will look like:
 ```
 
 Configuration files are loaded by `require()` in `op` so they must be valid requirable files (Node modules or JSON files).
+
+## Writing Commands and Plugins
+
+When commands are loaded by the `op` executable script there's no need to load the library in each module. Instead the library is made available as a global value called `OP`. To retrieve the underlying `discord.js` library you may reference `OP.Discord`. For examples check out the `examples/` directory.
 
 ## Library Usage
 
