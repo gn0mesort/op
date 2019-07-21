@@ -47,7 +47,7 @@ async function directCommandParse(message, bot) {
       command.isPermitted(message) ||
       bot.config.admins.includes(message.author.id)
     ) {
-      logger.log(`Running command ${argv[0]} with args: ${argv}`);
+      logger.info(`Running command ${argv[0]} with args: ${argv}`);
       await command.exec(argv, message, logger);
       logger.debug(`Command ${argv[0]} succeeded.`);
     }
