@@ -31,8 +31,7 @@ class Command {
     this[PRIVATE].version = config.version || '0.0.0';
     this[PRIVATE].help = config.help || '';
     this[PRIVATE].path = config.path || '';
-    this[PRIVATE].roles = config.roles || [];
-    this[PRIVATE].permissions = config.permissions || [];
+    this[PRIVATE].security = Object.freeze(config.security) || null;
     this[PRIVATE].config = Object.freeze(config.config || {});
   }
 
@@ -56,6 +55,10 @@ class Command {
     return this[PRIVATE].path;
   }
 
+  get security() {
+    return this[PRIVATE].security;
+  }
+
   get roles() {
     return this[PRIVATE].roles;
   }
@@ -66,6 +69,37 @@ class Command {
 
   get config() {
     return this[PRIVATE].config;
+  }
+
+  isPermitted(message) {
+    if (this.security) {
+      if (
+        Object.entries(this.security).length === 0 &&
+        this.security.constructor === Object
+      ) {
+        return true;
+      }
+      if (message.guild && message.guild.id in this.security) {
+        const guild = message.guild,
+              member = message.member,
+              security = this.security[guild.id];
+        if (!security.permissions && !security.roles) {
+          return true;
+        }
+        if (security.roles) {
+          for (let role of security.roles) {
+            const roleID = guild.roles.find(elem => elem.name === role);
+            if (member.roles.has(roleID)) {
+              return true;
+            }
+          }
+        }
+        if (this.security.permissions) {
+          return member.permissions.has(security.permissions);
+        }
+      }
+    }
+    return false;
   }
 
   /**

@@ -8,8 +8,8 @@ const Bunyan = require('bunyan');
 
 const PRIVATE = Symbol('PRIVATE');
 
-function loadModules(dir, configs, initial) {
-  let modules = initial;
+function loadModules(dir, configs, initial = {}) {
+  const modules = initial;
   let Mod = null;
   for (let config of configs) {
     if (!config.path) {
@@ -31,40 +31,23 @@ function isOpeningMention(message) {
   return message.content.match(pattern);
 }
 
-function isGuildMessage(message) {
-  return message.type === 'text' ||
-         message.type === 'store' ||
-         message.type === 'news';
-}
-
 async function directCommandParse(message, bot) {
   const logger = bot[PRIVATE].logger;
   if (
     isOpeningMention(message) &&
-    message.author.id != message.client.user.id
-  )  {
-    let argv = message.content.split(/\s+/g).slice(1),
-        command = bot[PRIVATE].commands[argv[0]];
+    message.author.id !== message.client.user.id &&
+    !message.author.bot
+  ) {
+    const argv = message.content.split(/\s+/g).slice(1),
+          command = bot.commands[argv[0]];
     if (!command) {
       throw new Error(`Command ${argv[0]} not found.`);
     }
-    let allowCommand = !(command.roles || command.permissions);
-    if (command.roles && isGuildMessage(message)) {
-      for (let roleName of command.roles[message.guild.id]) {
-       let role = message.guild.roles.find((elem) => {
-         return elem.name === roleName;
-       });
-       allowCommand |= role.members.get(message.member.id);
-      }
-    }
-    if (command.permissions && isGuildMessage(message)) {
-      allowCommand |= message.member.permissions.has(command.permissions);
-    }
-    if (bot[PRIVATE].config.admins.includes(message.author.id)) {
-      allowCommand = true;
-    }
-    if (allowCommand) {
-      logger.debug(`Running command ${argv[0]} with args: ${argv}`);
+    if (
+      command.isPermitted(message) ||
+      bot.config.admins.includes(message.author.id)
+    ) {
+      logger.log(`Running command ${argv[0]} with args: ${argv}`);
       await command.exec(argv, message, logger);
       logger.debug(`Command ${argv[0]} succeeded.`);
     }

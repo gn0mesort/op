@@ -12,14 +12,27 @@
   // file they're found in. If this is omitted the command will not be loaded
   // automatically.
   "path": "",
-  // An object containing the names of roles permitted to use the command.
-  // This should be formatted as:
-  // { "guildID": [ "roleName1", "roleName2" ] }
-  // Roles override the need for specific permissions.
-  "roles": {},
-  // Permissions required to use this command. This is an array of discord.js
-  // Permissions.
-  "permissions": [],
+  // Per server security control.
+  // Must be an object of the following structure or an empty object:
+  // {
+  //  "<GUILD_ID>": {
+  //    "roles": [ ...roleNames ],
+  //    "permissions": [ ...permissions ]
+  //   }
+  // }
+  // Roles are evaluated first and if a user is found to have ANY of the
+  // contained roles they are permitted to use the command.
+  // Permissions are evaluated second. You must have ALL permissions to execute
+  // a command.
+  // If the security object for a server is an empty object anyone on that
+  // server may use the command.
+  // If the security object for a server is a falsey the command is disabled.
+  // If the security object for the command is an empty object anyone may
+  // use the command.
+  // If the security object for the command is falsey the command is disabled
+  // globally
+  // Admin rights from the Bot configuration override this totally.
+  "security": {},
   // Arbitrary command specific configuration data.
   "config": {}
 }

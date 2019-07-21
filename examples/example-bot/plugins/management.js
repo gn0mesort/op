@@ -6,8 +6,7 @@ class ListPluginsCmd extends OP.Command {
       name: 'list-plugins',
       description: 'Lists all plugins and their state.',
       version: '1.0.0',
-      help: 'USAGE: list-plugins',
-      permissions: [ 'ADMINISTRATOR' ]
+      help: 'USAGE: list-plugins'
     });
     this.bot = bot;
   }
@@ -28,8 +27,7 @@ class ActivatePluginCmd extends OP.Command {
       name: 'activate-plugin',
       description: 'Activates a plugin.',
       version: '1.0.0',
-      help: 'USAGE: activate-plugin <PLUGIN>',
-      permissions: [ 'ADMINISTRATOR' ]
+      help: 'USAGE: activate-plugin <PLUGIN>'
     });
     this.bot = bot;
   }
@@ -59,8 +57,7 @@ class DeactivatePluginCmd extends OP.Command {
       name: 'deactivate-plugin',
       description: 'Deactivates a plugin.',
       version: '1.0.0',
-      help: 'USAGE: deactivate-plugin <PLUGIN>',
-      permissions: [ 'ADMINISTRATOR' ]
+      help: 'USAGE: deactivate-plugin <PLUGIN>'
     });
     this.bot = bot;
   }
@@ -90,7 +87,8 @@ class ListCommandsCmd extends OP.Command {
       name: 'list-commands',
       description: 'List all loaded commands.',
       version: '1.0.0',
-      help: 'USAGE: list-commands'
+      help: 'USAGE: list-commands',
+      security: {}
     });
     this.bot = bot;
   }
@@ -98,7 +96,12 @@ class ListCommandsCmd extends OP.Command {
   async exec(argv, message, logger) {
     let resp = '```\n';
     for (let command of Object.values(this.bot.commands)) {
-      resp += `${command.name}\n`;
+      if (
+        this.bot.config.admins.includes(message.author.id) ||
+        command.isPermitted(message)
+      ) {
+        resp += `${command.name}\n`;
+      }
     }
     resp += '```\n';
     return message.channel.send(resp);
@@ -111,7 +114,8 @@ class DescribeCmd extends OP.Command {
       name: 'describe',
       description: 'Provides explanations of commands and plugins.',
       version: '1.0.0',
-      help: 'USAGE: describe <COMMAND|PLUGIN>'
+      help: 'USAGE: describe <COMMAND|PLUGIN>',
+      security: {}
     });
     this.bot = bot;
   }
