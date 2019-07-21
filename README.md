@@ -1,6 +1,6 @@
-# `OP`
+# OP
 
-`OP` is a common base for Discord bots. It can be used either as a NodeJS library or as an executable command which loads a configured bot for you.
+`op` is a common base for Discord bots. It can be used either as a NodeJS library or as an executable command which loads a configured bot for you.
 
 ## Installation
 
@@ -28,7 +28,7 @@ const OP = require('op');
 
 ## Configuration
 
-All configuration data is described in the corresponding `*.config.template.jsonc` files in `examples/`. The simplest possible valid configuration would look like this:
+All configuration data is described in the corresponding `*.config.template.jsonc` files in [`examples/`](examples). The simplest possible valid configuration would look like this:
 
 ```json
 {
@@ -77,7 +77,7 @@ Configuration files are loaded by `require()` in `op` so they must be valid requ
 
 ## Writing Commands and Plugins
 
-When commands are loaded by the `op` executable script there's no need to load the library in each module. Instead the library is made available as a global value called `OP`. To retrieve the underlying `discord.js` library you may reference `OP.Discord`. For examples check out the `examples/` directory.
+When commands are loaded by the `op` executable script there's no need to load the library in each module. Instead the library is made available as a global value called `OP`. To retrieve the underlying [`discord.js`](https://discord.js.org) library you may reference `OP.Discord`. For examples check out the [`examples/`](examples) directory.
 
 ## Library Usage
 
