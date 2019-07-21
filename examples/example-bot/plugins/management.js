@@ -133,6 +133,10 @@ class DescribeCmd extends OP.Command {
       r += `${plugin.name} - ${plugin.version} - ${plugin.active}\n` +
            `${plugin.description}\n`;
     }
+    else if (argv[1] === message.client.user.toString()) {
+      let bot = this.bot;
+      r += `${bot.config.name} - ${bot.config.version}`;
+    }
     else {
       let err = `No command or plugin with name ${argv[1]}.`
       message.channel.send(err);
