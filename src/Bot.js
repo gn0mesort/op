@@ -166,6 +166,10 @@ class Bot {
   get commands() {
     return this[PRIVATE].commands;
   }
+
+  get config() {
+    return this[PRIVATE].config;
+  }
 }
 
 module.exports = Bot;
