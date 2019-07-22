@@ -45,8 +45,7 @@ async function directCommandParse(message, bot) {
       throw new Error(`Command ${argv[0]} not found.`);
     }
     if (
-      command.isPermitted(message) ||
-      bot.config.admins.includes(message.author.id)
+      command.isPermitted(message, bot.config.admins)
     ) {
       logger.info(`Running command ${argv[0]} with args: ${argv}`);
       try {

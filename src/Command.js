@@ -71,7 +71,22 @@ class Command {
     return this[PRIVATE].config;
   }
 
-  isPermitted(message) {
+  /**
+   * Checks whether or not a command is permitted to execute.
+   *
+   * Permission is granted to use a command using a map of guild ID values and
+   * permission/role data as described in command.config.template.jsonc.
+   *
+   * This method may be overidden to permit command usage based on custom
+   * criteria on a per command basis.
+   *
+   * @param {Discord.Message} message The message that contained the command.
+   * @param {Array} admins A list of administrator user IDs.
+   */
+  isPermitted(message, admins = []) {
+    if (admins.includes(message.author.id)) {
+      return true;
+    }
     if (this.security) {
       if (
         Object.entries(this.security).length === 0 &&
