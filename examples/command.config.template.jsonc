@@ -13,7 +13,8 @@
   // automatically.
   "path": "",
   // Per server security control.
-  // Must be an object of the following structure or an empty object:
+  // By default this must be an object of the following structure or an empty
+  // object:
   // {
   //  "<GUILD_ID>": {
   //    "roles": [ ...roleNames ],
@@ -23,15 +24,28 @@
   // Roles are evaluated first and if a user is found to have ANY of the
   // contained roles they are permitted to use the command.
   // Permissions are evaluated second. You must have ALL permissions to execute
-  // a command.
-  // If the security object for a server is an empty object anyone on that
-  // server may use the command.
-  // If the security object for a server is a falsey the command is disabled.
+  // a command. Channel overrides will not be taken into account.
+  // Bots are never allowed to invoke commands nor can an OP based bot
+  // recursively invoke commands on itself (this is handled at the level of the
+  // command parser and is not optional).
+  //
+  // A user defined command may override this behavior.
+  //
+  // By default:
+  // If the user is in the list of Bot adminstrators they may use the command
+  // globally (including in a DM channel).
+  //
+  // If the security object for a server does not contain a permissions
+  // or roles value anyone on that server may use the command.
+  //
+  // If the security object for a server is a falsey the command is disabled
+  // for that server.
+  //
   // If the security object for the command is an empty object anyone may
-  // use the command.
+  // use the command globally (including in a DM channel).
+  //
   // If the security object for the command is falsey the command is disabled
-  // globally
-  // Admin rights from the Bot configuration override this totally.
+  // globally (making the command admin only).
   "security": {},
   // Arbitrary command specific configuration data.
   "config": {}

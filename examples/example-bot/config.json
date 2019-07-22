@@ -26,6 +26,7 @@
       "description": "Fetches user data from Discord.",
       "version": "1.0.0",
       "help": "USAGE: fetch-user <USER_ID>",
+      "path": "cmds/fetch_user.js",
       "security": {}
     }
   ]

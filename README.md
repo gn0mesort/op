@@ -1,6 +1,6 @@
 # OP
 
-`op` is a common base for Discord bots. It can be used either as a NodeJS library or as an executable command which loads a configured bot for you.
+`op` is a common base for Discord bots. It can be used either as a NodeJS library or as an executable command which loads a configured bot for you. `op` was designed mostly for my own personal use as a way of quickly adding or removing features from a Discord bot without having the constantly rewrite the base components. The idea is to have a single program that might be used as the basis for many bots (which are themselves just collections of commands or plugins). Other than bootstrapping a new bot (loading plugins, loading commands, loggining into Discord, and hooking up to basic events) `op` is designed to do almost nothing on its own.
 
 ## Installation
 
@@ -61,13 +61,16 @@ More realistically a valid configuration will look like:
       "description": "Echos command arguments.",
       "version": "1.0.0",
       "help": "USAGE: echo <TEXT>",
-      "path": "cmds/echo.js"
+      "path": "cmds/echo.js",
+      "security": {}
     },
     {
       "name": "fetch-user",
       "description": "Fetches user data from Discord.",
       "version": "1.0.0",
-      "help": "USAGE: fetch-user <USER_ID>"
+      "help": "USAGE: fetch-user <USER_ID>",
+      "path": "cmds/fetch_user.js",
+      "security": {}
     }
   ]
 }
@@ -112,7 +115,8 @@ const config = {
       name: "echo",
       description: "Echos command arguments.",
       version: "1.0.0",
-      help: "USAGE: echo <TEXT>"
+      help: "USAGE: echo <TEXT>",
+      security: {}
     }
   ]
 },
